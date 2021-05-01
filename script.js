@@ -3,7 +3,13 @@ const ctx = canvas.getContext("2d");
 canvas.witdth = 1200;
 canvas.heigth = 1766;
 
-const keys = [];
+const cursorKeyCodes = {
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40
+}
+const pressedKeys = [];
 
 const player = {
   x: 20,
@@ -51,36 +57,36 @@ function animate() {
 animate();
 
 window.addEventListener('keydown' , function (e) {
-    keys[e.keyCode] = true;
-    console.log(keys)
+    pressedKeys[e.keyCode] = true;
+    console.log(pressedKeys)
 })
 
 window.addEventListener('keyup' , function (e) {
-    delete keys [e.keyCode];
-    console.log(keys)
+    delete pressedKeys [e.keyCode];
+    console.log(pressedKeys)
 })
 
 function movePlayer() {
 
-    if (keys[38] && player.y > 0) {
+    if (pressedKeys[cursorKeyCodes.UP] && player.y > 0) {
         player.y -= player.speed
         player.frameY = 3;
 
     }
 
-    if (keys[37] && player.x > 0) {
+    if (pressedKeys[cursorKeyCodes.LEFT] && player.x > 0) {
         player.x -= player.speed
         player.frameY = 1;
 
     }
 
-    if (keys[40] && player.y < canvas.height - player.height) {
+    if (pressedKeys[cursorKeyCodes.DOWN] && player.y < canvas.height - player.height) {
         player.y += player.speed
         player.frameY = 0;
 
     }
 
-    if (keys[39] && player.x < canvas.width - player.width) {
+    if (pressedKeys[cursorKeyCodes.RIGHT] && player.x < canvas.width - player.width) {
         player.x += player.speed
         player.frameY = 2;
 
